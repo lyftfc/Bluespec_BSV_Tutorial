@@ -1,0 +1,7 @@
+{
+    "editor.fontFamily": "'Fira Code', 'Cascadia Code', 'Courier New', monospace",
+    "editor.fontLigatures": "'zero', 'ss03', 'ss05', 'ss06', 'cv02', 'cv20', 'cv23'",
+    "editor.fontSize": 13,
+    "terminal.integrated.fontFamily": "'Cascadia Code', 'Courier New', monospace",
+    "terminal.integrated.fontSize": 13
+}

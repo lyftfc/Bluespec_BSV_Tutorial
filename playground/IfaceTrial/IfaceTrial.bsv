@@ -17,7 +17,7 @@ typedef UInt #(32) U32_t;
 
 module mkIfaceTrial (Empty);
 
-    Foo #(U32_t) instFoo <- mkFoo;
+    Foo #(U32_t) instFoo <- mkFoo_u32;
     Reg #(U32_t) cnt <- mkRegU;
 
     function Action dispCycle ();
@@ -45,6 +45,11 @@ module mkIfaceTrial (Empty);
 
     rule prn_rd;
         $display(instFoo.myregs[0].rdReg, instFoo.myregs[1].rdReg);
+    endrule
+
+    let {rx, ry} <- mkTwoRegs(cnt);
+    rule prn_rxy;
+        $display("Count ", fshow(cnt), " Rx ", fshow(rx), " Ry ", fshow(ry));
     endrule
 
 endmodule
@@ -78,6 +83,23 @@ module mkFoo (Foo #(t))
     // interface myregs = map(toIfaceReg, cons(ra, cons(rb, nil)));
     interface myregs = map(toIfaceReg, cons(ra, cons(rb, nil)));
 
+endmodule
+
+(* synthesize *)
+module mkFoo_u32 (Foo #(U32_t));
+    Foo #(U32_t) m <- mkFoo;
+    return m;
+endmodule
+
+module mkTwoRegs #(Reg#(dt) oth_reg) (Tuple2 #(Reg#(dt), Reg#(dt)))
+        provisos (Bits#(dt, dt_w), Arith#(dt));
+    Reg#(dt) ra <- mkRegU;
+    Reg#(dt) rb <- mkRegU;
+    rule every;
+        ra <= oth_reg + 1;
+        rb <= oth_reg + 2;
+    endrule
+    return tuple2(ra, rb);
 endmodule
 
 endpackage : IfaceTrial

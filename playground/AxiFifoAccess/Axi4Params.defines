@@ -1,0 +1,13 @@
+`define BRSTLEN_W   8
+`define DLEN_W      12
+`define MAX_OTF     8
+`define AXI_IFC_PRMS_DCL \
+    numeric type id_w, numeric type addr_w, numeric type data_w
+`define AXI_IFC_PRMS \
+    id_w, addr_w, data_w
+`define AXI_TLM_PRMS \
+    `AXI_IFC_PRMS, `BRSTLEN_W, 0
+`define AXI_TLM_REQ_RESP \
+    TLMRequest#(`AXI_TLM_PRMS), TLMResponse#(`AXI_TLM_PRMS)
+`define AXI_XATR_PRMS \
+    `AXI_TLM_REQ_RESP, `AXI_TLM_PRMS

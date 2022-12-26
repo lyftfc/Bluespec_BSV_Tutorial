@@ -21,10 +21,6 @@ typedef 128 Axi_Data_W;
 
 `define AXI4_PRMS \
     Axi_Id_W, Axi_Addr_W, Axi_Data_W
-`define AXI4_TLM_REQ_RESP \
-    TLMRequest#(`AXI4_PRMS, 8, 0), TLMResponse#(`AXI4_PRMS, 8, 0)
-`define AXI4_XATR_PRMS \
-    `AXI4_TLM_REQ_RESP, `AXI4_PRMS, 8, 0
 
 typedef Axi4TrxnStreamBeat#(`AXI4_PRMS) AxiTrxnBeat_t;
 typedef Axi4TrxnHeader#(`AXI4_PRMS) AxiTrxnHdr_t;

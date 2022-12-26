@@ -15,17 +15,7 @@ export Axi4TrxnHeader(..), Axi4TrxnPayload(..), Axi4TrxnStreamBeat(..);
 export Axi4MstServer(..), mkAxi4MstServer;
 export mkAxi4MstFifo;
 
-`define BRSTLEN_W   8
-`define DLEN_W      12
-`define MAX_OTF     8
-`define AXI_IFC_PRMS_DCL \
-    numeric type id_w, numeric type addr_w, numeric type data_w
-`define AXI_IFC_PRMS \
-    id_w, addr_w, data_w
-`define AXI_TLM_PRMS \
-    `AXI_IFC_PRMS, `BRSTLEN_W, 0
-`define AXI_XATR_PRMS \
-    TLMRequest#(`AXI_TLM_PRMS), TLMResponse#(`AXI_TLM_PRMS), `AXI_TLM_PRMS
+`include "Axi4Params.defines"
 
 typedef struct {
     Bool            trxnWrEn;   // False for read

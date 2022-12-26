@@ -9,15 +9,7 @@ import Assert::*;
 
 export mkAxi4BramSlave;
 
-`define BRSTLEN_W   8
-`define AXI_IFC_PRMS \
-    id_w, addr_w, data_w
-`define AXI_TLM_PRMS \
-    `AXI_IFC_PRMS, `BRSTLEN_W, 0
-`define AXI_TLM_REQ_RESP \
-    TLMRequest#(`AXI_TLM_PRMS), TLMResponse#(`AXI_TLM_PRMS)
-`define AXI_XATR_PRMS \
-    `AXI_TLM_REQ_RESP, `AXI_TLM_PRMS
+`include "Axi4Params.defines"
 
 module mkAxi4BramSlave #(
     Integer addr_start, Integer addr_end

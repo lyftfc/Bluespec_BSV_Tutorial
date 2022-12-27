@@ -6,6 +6,7 @@ import BRAM::*;
 import TLM3::*;
 import Axi4::*;
 import Assert::*;
+import Axi4TlmConvert::*;
 
 export mkAxi4BramSlave;
 
@@ -36,8 +37,10 @@ module mkAxi4BramSlave #(
         }
     );
     TLMRecvIFC#(`AXI_TLM_REQ_RESP) tlm_bram <- mkTLMBRAM(bram.portA);
+    Axi4TLMConverter#(`AXI_IFC_PRMS) tlm_burst_reduce <- mkAxi4BurstReducer(1);
 
-    mkConnection(s_xatr.tlm, tlm_bram);
+    mkConnection(s_xatr.tlm, tlm_burst_reduce.tlm_in);
+    mkConnection(tlm_burst_reduce.tlm_out, tlm_bram);
     interface Axi4RdSlave read = s_xatr.read.bus;
     interface Axi4WrSlave write = s_xatr.write.bus;
 endmodule
